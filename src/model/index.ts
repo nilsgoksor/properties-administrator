@@ -1,3 +1,3 @@
 export * from "./Address.interface";
-export * from "./Tenancies.interface";
+export * from "./Tenancy.interface";
 export * from "./Landlord.interface";

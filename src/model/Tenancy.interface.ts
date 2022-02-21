@@ -1,6 +1,6 @@
 import { AddressI, LandlordI } from ".";
 
-export interface TenanciesI {
+export interface TenancyI {
   address: AddressI;
   size: string;
   rooms: string;
