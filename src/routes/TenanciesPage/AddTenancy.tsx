@@ -54,66 +54,70 @@ export const AddTenancy = ({ landlord, addTenacy }: AddTenancyProps) => {
     country.length > 2 && city.length > 2 && street.length > 2 && rooms !== "";
 
   return (
-    <>
+    <div className="my-4">
       <Button onClick={() => setShowAddTenancy(true)}>Add Tenancy</Button>
       <Modal show={showAddTenancy} hide={() => setShowAddTenancy(false)}>
-        <h2>Your new tenacy</h2>
-        <TextField
-          required
-          label="Country"
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
-        />
-        <TextField
-          required
-          label="City"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-        />
-        <TextField
-          required
-          label="Street"
-          value={street}
-          onChange={(e) => setStreet(e.target.value)}
-        />
-        <TextField
-          label="Postcode"
-          value={postCode}
-          onChange={(e) => setPostCode(e.target.value)}
-        />
-        <FormControl fullWidth required>
-          <InputLabel id="demo-simple-select-label">Rooms</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={rooms}
-            label="Rooms"
-            onChange={(e) => setRooms(e.target.value)}
-          >
-            {RoomSizes.map((s) => (
-              <MenuItem key={s} value={s}>
-                {s}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <TextField
-          label="Size"
-          value={size}
-          onChange={(e) => setSize(e.target.value)}
-        />
-        <TextField
-          label="Utilities"
-          fullWidth
-          value={utilities}
-          onChange={(e) => setUtilities(e.target.value)}
-          helperText="Separated by comma, i.e. Dishwasher,WiFi"
-        />
-        <Button onClick={() => addTenancyHandler()} disabled={!validInfo}>
-          Create
-        </Button>
-        <Button onClick={() => setShowAddTenancy(false)}>Cancel</Button>
+        <div className="flex flex-col space-y-2 > * + *">
+          <h2 className="text-2xl">New tenacy</h2>
+          <TextField
+            required
+            label="Country"
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+          />
+          <TextField
+            required
+            label="City"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+          <TextField
+            required
+            label="Street"
+            value={street}
+            onChange={(e) => setStreet(e.target.value)}
+          />
+          <TextField
+            label="Postcode"
+            value={postCode}
+            onChange={(e) => setPostCode(e.target.value)}
+          />
+          <FormControl fullWidth required>
+            <InputLabel id="demo-simple-select-label">Rooms</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={rooms}
+              label="Rooms"
+              onChange={(e) => setRooms(e.target.value)}
+            >
+              {RoomSizes.map((s) => (
+                <MenuItem key={s} value={s}>
+                  {s}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <TextField
+            label="Size"
+            value={size}
+            onChange={(e) => setSize(e.target.value)}
+          />
+          <TextField
+            label="Utilities"
+            fullWidth
+            value={utilities}
+            onChange={(e) => setUtilities(e.target.value)}
+            helperText="Separated by comma, i.e. Dishwasher,WiFi"
+          />
+          <div className="flex justify-end">
+            <Button onClick={() => addTenancyHandler()} disabled={!validInfo}>
+              Create
+            </Button>
+            <Button onClick={() => setShowAddTenancy(false)}>Cancel</Button>
+          </div>
+        </div>
       </Modal>
-    </>
+    </div>
   );
 };

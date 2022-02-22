@@ -20,12 +20,7 @@ export const Modal = ({ children, show, hide }: ModalProps) => {
   };
 
   return (
-    <MuiModal
-      open={show}
-      onClose={() => hide()}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
+    <MuiModal open={show} onClose={() => hide()}>
       <Box sx={style}>{children}</Box>
     </MuiModal>
   );

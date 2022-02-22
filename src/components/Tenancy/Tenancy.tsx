@@ -22,7 +22,7 @@ export const Tenancy = ({ tenancy }: TenancyProps) => {
   const hasUtilities = tenancy.utilities[0].length > 0;
 
   return (
-    <Card>
+    <Card className="my-4">
       <CardHeader
         avatar={<Avatar>{tenancy.landlord.image}</Avatar>}
         title={tenancy.address.street}

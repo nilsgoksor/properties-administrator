@@ -27,9 +27,9 @@ export const TenanciesPage = () => {
         landlord={landlord}
         addTenacy={(t: TenancyI) => setYourTenancies([...yourTenancies, t])}
       />
-      <h2>These are your tenancies</h2>
       {yourTenancies.length > 0 ? (
         <>
+          <h2>These are your tenancies</h2>
           {yourTenancies.map((tenancy) => (
             <Tenancy key={tenancy.address.street} tenancy={tenancy} />
           ))}
