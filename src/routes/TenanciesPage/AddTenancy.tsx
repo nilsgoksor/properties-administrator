@@ -1,4 +1,5 @@
 import {
+  Autocomplete,
   Button,
   FormControl,
   InputLabel,
@@ -6,12 +7,13 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "../../components/Modal";
 import { RoomSizes } from "../../constants";
 import { LandlordI, TenancyI } from "../../model";
 import axios from "axios";
 import { v4 } from "uuid";
+import { StreetDataI } from "../../model/StreetData.interface";
 
 interface AddTenancyProps {
   landlord: LandlordI;
@@ -28,6 +30,9 @@ export const AddTenancy = ({ landlord, addTenancy }: AddTenancyProps) => {
   const [rooms, setRooms] = useState("");
   const [size, setSize] = useState("");
   const [utilities, setUtilities] = useState("");
+
+  const [streetSearch, setStreetSearch] = useState("");
+  const [streetResults, setStreetResults] = useState<StreetDataI[]>([]);
 
   const addTenancyHandler = () => {
     const id = v4();
@@ -46,15 +51,30 @@ export const AddTenancy = ({ landlord, addTenancy }: AddTenancyProps) => {
     };
 
     axios
-      .post<TenancyI>(`${window.location.origin}/tenancies`, newTenancy)
+      .post<TenancyI>(`${"http:localhost:1337"}/tenancies`, newTenancy)
       .then((res) => {
         setShowAddTenancy(false);
         addTenancy(res.data);
       });
   };
 
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.dataforsyningen.dk/autocomplete?q=${streetSearch}&type=adresse&caretpos=6&supplerendebynavn=true&stormodtagerpostnumre=true&multilinje=true&fuzzy=`
+      )
+      .then((res) => setStreetResults(res.data));
+  }, [streetSearch]);
+
+  const handleSelectStreet = (newStreet: string) => {
+    setStreetSearch(newStreet);
+    setStreet(newStreet);
+  };
+
+  const streetData = streetResults.find((r) => r.tekst === street);
+  const streetValid = typeof streetData?.tekst === "string";
   const validInfo =
-    country.length > 2 && city.length > 2 && street.length > 2 && rooms !== "";
+    streetValid && country.length > 2 && city.length > 2 && rooms !== "";
 
   return (
     <div className="my-4">
@@ -74,11 +94,13 @@ export const AddTenancy = ({ landlord, addTenancy }: AddTenancyProps) => {
             value={city}
             onChange={(e) => setCity(e.target.value)}
           />
-          <TextField
-            required
-            label="Street"
-            value={street}
-            onChange={(e) => setStreet(e.target.value)}
+          <Autocomplete
+            options={streetResults.map((o) => o.tekst)}
+            getOptionLabel={(option) => option || ""}
+            renderInput={(params) => <TextField {...params} label="Street" />}
+            value={streetSearch}
+            onInputChange={(e: any) => setStreetSearch(e?.target?.value)}
+            onChange={(e, v: any) => handleSelectStreet(v as string)}
           />
           <TextField
             label="Postcode"
