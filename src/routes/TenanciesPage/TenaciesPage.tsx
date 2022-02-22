@@ -14,6 +14,19 @@ export const TenanciesPage = () => {
   const [yourTenancies, setYourTenancies] = useState<TenancyI[]>([]);
   const { tenancies, loading, error } = useTenansies();
 
+  const addTenacy = (addTenacy: TenancyI) => {
+    setYourTenancies([...yourTenancies, addTenacy]);
+  };
+
+  const removeTenacy = (removeId: string) => {
+    const updatedTenacies = [...yourTenancies];
+    const removeIndex = updatedTenacies.findIndex((t) => t.id === removeId);
+    if (removeIndex !== -1) {
+      updatedTenacies.splice(removeIndex, 1);
+      setYourTenancies(updatedTenacies);
+    }
+  };
+
   useEffect(() => {
     setYourTenancies(tenancies);
   }, [tenancies]);
@@ -23,15 +36,16 @@ export const TenanciesPage = () => {
 
   return (
     <>
-      <AddTenancy
-        landlord={landlord}
-        addTenacy={(t: TenancyI) => setYourTenancies([...yourTenancies, t])}
-      />
+      <AddTenancy landlord={landlord} addTenacy={addTenacy} />
       {yourTenancies.length > 0 ? (
         <>
           <h2>These are your tenancies</h2>
           {yourTenancies.map((tenancy) => (
-            <Tenancy key={tenancy.address.street} tenancy={tenancy} />
+            <Tenancy
+              key={tenancy.address.street}
+              tenancy={tenancy}
+              removeTenacy={removeTenacy}
+            />
           ))}
         </>
       ) : (

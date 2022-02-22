@@ -11,6 +11,7 @@ import { Modal } from "../../components/Modal";
 import { RoomSizes } from "../../constants";
 import { LandlordI, TenancyI } from "../../model";
 import axios from "axios";
+import { v4 } from "uuid";
 
 interface AddTenancyProps {
   landlord: LandlordI;
@@ -29,7 +30,9 @@ export const AddTenancy = ({ landlord, addTenacy }: AddTenancyProps) => {
   const [utilities, setUtilities] = useState("");
 
   const addTenancyHandler = () => {
+    const id = v4();
     const newTenancy: TenancyI = {
+      id: id,
       address: {
         country: country,
         street: street,
