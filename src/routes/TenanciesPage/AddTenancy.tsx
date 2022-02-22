@@ -15,10 +15,10 @@ import { v4 } from "uuid";
 
 interface AddTenancyProps {
   landlord: LandlordI;
-  addTenacy(t: TenancyI): void;
+  addTenancy(t: TenancyI): void;
 }
 
-export const AddTenancy = ({ landlord, addTenacy }: AddTenancyProps) => {
+export const AddTenancy = ({ landlord, addTenancy }: AddTenancyProps) => {
   const [showAddTenancy, setShowAddTenancy] = useState(false);
 
   const [country, setCountry] = useState("");
@@ -49,7 +49,7 @@ export const AddTenancy = ({ landlord, addTenacy }: AddTenancyProps) => {
       .post<TenancyI>(`${window.location.origin}/tenancies`, newTenancy)
       .then((res) => {
         setShowAddTenancy(false);
-        addTenacy(res.data);
+        addTenancy(res.data);
       });
   };
 
@@ -61,7 +61,7 @@ export const AddTenancy = ({ landlord, addTenacy }: AddTenancyProps) => {
       <Button onClick={() => setShowAddTenancy(true)}>Add Tenancy</Button>
       <Modal show={showAddTenancy} hide={() => setShowAddTenancy(false)}>
         <div className="flex flex-col space-y-2 > * + *">
-          <h2 className="text-2xl">New tenacy</h2>
+          <h2 className="text-2xl">New tenancy</h2>
           <TextField
             required
             label="Country"

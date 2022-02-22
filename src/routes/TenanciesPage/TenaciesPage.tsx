@@ -14,11 +14,11 @@ export const TenanciesPage = () => {
   const [yourTenancies, setYourTenancies] = useState<TenancyI[]>([]);
   const { tenancies, loading, error } = useTenansies();
 
-  const addTenacy = (addTenacy: TenancyI) => {
-    setYourTenancies([...yourTenancies, addTenacy]);
+  const addTenancy = (addTenancy: TenancyI) => {
+    setYourTenancies([...yourTenancies, addTenancy]);
   };
 
-  const removeTenacy = (removeId: string) => {
+  const removeTenancy = (removeId: string) => {
     const updatedTenacies = [...yourTenancies];
     const removeIndex = updatedTenacies.findIndex((t) => t.id === removeId);
     if (removeIndex !== -1) {
@@ -36,7 +36,7 @@ export const TenanciesPage = () => {
 
   return (
     <>
-      <AddTenancy landlord={landlord} addTenacy={addTenacy} />
+      <AddTenancy landlord={landlord} addTenancy={addTenancy} />
       {yourTenancies.length > 0 ? (
         <>
           <h2>These are your tenancies</h2>
@@ -44,7 +44,7 @@ export const TenanciesPage = () => {
             <Tenancy
               key={tenancy.address.street}
               tenancy={tenancy}
-              removeTenacy={removeTenacy}
+              removeTenancy={removeTenancy}
             />
           ))}
         </>

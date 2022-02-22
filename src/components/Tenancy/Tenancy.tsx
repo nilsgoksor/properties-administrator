@@ -20,10 +20,10 @@ import axios from "axios";
 
 interface TenancyProps {
   tenancy: TenancyI;
-  removeTenacy(removeIndex: string): void;
+  removeTenancy(removeIndex: string): void;
 }
 
-export const Tenancy = ({ tenancy, removeTenacy }: TenancyProps) => {
+export const Tenancy = ({ tenancy, removeTenancy }: TenancyProps) => {
   const [expanded, setExpanded] = useState(false);
   const [editing, setEditing] = useState(false);
   const [removing, setRemoving] = useState(false);
@@ -35,7 +35,7 @@ export const Tenancy = ({ tenancy, removeTenacy }: TenancyProps) => {
       .delete(`${window.location.origin}/tenancies/${tenancy.id}`)
       .then(() => {
         setRemoving(false);
-        removeTenacy(tenancy.id);
+        removeTenancy(tenancy.id);
       })
       .catch(() => {
         setRemoving(false);
