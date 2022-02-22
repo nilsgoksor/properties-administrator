@@ -62,7 +62,7 @@ export const Tenancy = ({ tenancy, removeTenancy }: TenancyProps) => {
           </Stack>
           {hasUtilities && (
             <>
-              <p>With the following utilities:</p>
+              <p className="my-4">With the following utilities:</p>
               <Stack direction="row" spacing={1}>
                 {tenancy.utilities.map((u) => (
                   <Chip key={u} label={`${u}`} />
