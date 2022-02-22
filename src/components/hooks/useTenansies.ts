@@ -9,7 +9,7 @@ export const useTenansies = () => {
 
   useEffect(() => {
     axios
-      .get<TenancyI[]>("http://localhost:1337/tenancies")
+      .get<TenancyI[]>(`${window.location.origin}/tenancies`)
       .then((res) => {
         setTenancies(res.data);
         setLoading(false);

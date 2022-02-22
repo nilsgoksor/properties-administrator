@@ -46,7 +46,7 @@ export const AddTenancy = ({ landlord, addTenacy }: AddTenancyProps) => {
     };
 
     axios
-      .post<TenancyI>(`http://localhost:1337/tenancies`, newTenancy)
+      .post<TenancyI>(`${window.location.origin}/tenancies`, newTenancy)
       .then((res) => {
         setShowAddTenancy(false);
         addTenacy(res.data);
