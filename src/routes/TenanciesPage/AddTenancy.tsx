@@ -55,6 +55,12 @@ export const AddTenancy = ({ landlord, addTenancy }: AddTenancyProps) => {
       .then((res) => {
         setShowAddTenancy(false);
         addTenancy(res.data);
+        setCountry("");
+        setCity("");
+        setPostCode("");
+        setRooms("");
+        setSize("");
+        setUtilities("");
       });
   };
 
@@ -67,8 +73,6 @@ export const AddTenancy = ({ landlord, addTenancy }: AddTenancyProps) => {
   }, [streetSearch]);
 
   const handleSelectStreet = (newStreet: string) => {
-    console.log(newStreet);
-
     setStreetSearch(newStreet);
     setStreet(newStreet);
   };
@@ -84,6 +88,14 @@ export const AddTenancy = ({ landlord, addTenancy }: AddTenancyProps) => {
       <Modal show={showAddTenancy} hide={() => setShowAddTenancy(false)}>
         <div className="flex flex-col space-y-4 > * + *">
           <h2 className="text-2xl">New tenancy</h2>
+          <Autocomplete
+            options={streetResults.map((o) => o.tekst)}
+            getOptionLabel={(option) => option || ""}
+            renderInput={(params) => <TextField {...params} label="Street" />}
+            value={streetSearch}
+            onInputChange={(e: any) => setStreetSearch(e?.target?.value)}
+            onChange={(e, v: any) => handleSelectStreet(v as string)}
+          />
           <TextField
             required
             label="Country"
@@ -95,14 +107,6 @@ export const AddTenancy = ({ landlord, addTenancy }: AddTenancyProps) => {
             label="City"
             value={city}
             onChange={(e) => setCity(e.target.value)}
-          />
-          <Autocomplete
-            options={streetResults.map((o) => o.tekst)}
-            getOptionLabel={(option) => option || ""}
-            renderInput={(params) => <TextField {...params} label="Street" />}
-            value={streetSearch}
-            onInputChange={(e: any) => setStreetSearch(e?.target?.value)}
-            onChange={(e, v: any) => handleSelectStreet(v as string)}
           />
           <TextField
             label="Postcode"
