@@ -30,7 +30,8 @@ Visit https://properties-administrator.herokuapp.com/
 
 - Possibility to update tenancy information
 - When creating tenancy, auto-fetch post-code and other data for a steet address to the user does not have to do so manually
-- Possibility to login and logout to different accounts
+- When creating tenancy, give feedback to the user what's expected in each input and why "Create" may be disabled
+- Possibility to login and logout to different accounts (and remove hardcoded landlord Nils)
 - Localistation
 - Google street view for tenancies
 - Sorting and filtering of tenancies
