@@ -51,7 +51,7 @@ export const AddTenancy = ({ landlord, addTenancy }: AddTenancyProps) => {
     };
 
     axios
-      .post<TenancyI>(`${"http:localhost:1337"}/tenancies`, newTenancy)
+      .post<TenancyI>(`${process.env.REACT_APP_API_URL}/tenancies`, newTenancy)
       .then((res) => {
         setShowAddTenancy(false);
         addTenancy(res.data);
@@ -67,6 +67,8 @@ export const AddTenancy = ({ landlord, addTenancy }: AddTenancyProps) => {
   }, [streetSearch]);
 
   const handleSelectStreet = (newStreet: string) => {
+    console.log(newStreet);
+
     setStreetSearch(newStreet);
     setStreet(newStreet);
   };
@@ -80,7 +82,7 @@ export const AddTenancy = ({ landlord, addTenancy }: AddTenancyProps) => {
     <div className="my-4">
       <Button onClick={() => setShowAddTenancy(true)}>Add Tenancy</Button>
       <Modal show={showAddTenancy} hide={() => setShowAddTenancy(false)}>
-        <div className="flex flex-col space-y-2 > * + *">
+        <div className="flex flex-col space-y-4 > * + *">
           <h2 className="text-2xl">New tenancy</h2>
           <TextField
             required

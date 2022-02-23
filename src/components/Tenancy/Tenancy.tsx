@@ -32,7 +32,7 @@ export const Tenancy = ({ tenancy, removeTenancy }: TenancyProps) => {
 
   const deleteHandler = () => {
     axios
-      .delete(`${window.location.origin}/tenancies/${tenancy.id}`)
+      .delete(`${process.env.REACT_APP_API_URL}/tenancies/${tenancy.id}`)
       .then(() => {
         setRemoving(false);
         removeTenancy(tenancy.id);

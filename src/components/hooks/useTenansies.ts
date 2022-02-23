@@ -9,7 +9,7 @@ export const useTenansies = () => {
 
   useEffect(() => {
     axios
-      .get<TenancyI[]>(`${window.location.origin}/tenancies`)
+      .get<TenancyI[]>(`${process.env.REACT_APP_API_URL}/tenancies`)
       .then((res) => {
         setTenancies(res.data);
         setLoading(false);
